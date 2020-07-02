@@ -16,7 +16,7 @@ mongoose
         useUnifiedTopology: true,
         useCreateIndex: true
     })
-    .then(() => console.log('DB connected'))
+    .then(() => console.log('DB connected!'))
     .catch(err => console.log('DB CONNECTION ERROR: ', err));
 
 //import routes
