@@ -7,8 +7,7 @@ require('dotenv').config();
 
 const app = express();
 
-//connect to database
-
+// connect to db
 mongoose
     .connect(process.env.DATABASE, {
         useNewUrlParser: true,
@@ -16,29 +15,27 @@ mongoose
         useUnifiedTopology: true,
         useCreateIndex: true
     })
-    .then(() => console.log('DB connected!'))
+    .then(() => console.log('DB connected'))
     .catch(err => console.log('DB CONNECTION ERROR: ', err));
 
-//import routes
+// import routes
 const authRoutes = require('./routes/auth');
 
-//app middleware
+// app middlewares
 app.use(morgan('dev'));
 app.use(bodyParser.json());
-// app.use(cors()); //allows all origins
-if(process.env.NODE_ENV = 'development') {
-	app.use(cors({origin: `http://localhost:3000`}))
+// app.use(cors()); // allows all origins
+if ((process.env.NODE_ENV = 'development')) {
+    app.use(cors({ origin: `http://localhost:3000` }));
 }
 
-
-//middleware
+// middleware
 
 //anything that request /api will be forwarded to authRoutes
 app.use('/api', authRoutes);
 
 const port = process.env.PORT || 8000;
-
 app.listen(port, () => {
-	console.log(`API is running on port ${port}`)
+    console.log(`API is running on port ${port}`);
 });
 
